@@ -1,0 +1,54 @@
+<!DOCTYPE html>  
+<html>  
+    <head>  
+        <title>Search Twtter</title>  
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js"></script>
+        <script type="text/javascript" src="js/twitter.js"></script>
+        <script type="text/javascript" src="js/Request.JSONP.js"></script>
+        <script type="text/javascript">
+        	page=1;
+       		window.addEvent('domready', function() {
+       			$('searchField').addEvent('keyup',function(el){
+					searchReq=twitterSearch('results',$('searchField').value,$('searchNumPerPage').options[$('searchNumPerPage').selectedIndex].value,$('resultType').options[$('resultType').selectedIndex].value,page,'top');   
+				});
+				$('searchNumPerPage').addEvent('change',function(el){
+					searchReq=twitterSearch('results',$('searchField').value,$('searchNumPerPage').options[$('searchNumPerPage').selectedIndex].value,$('resultType').options[$('resultType').selectedIndex].value,page,'top');   
+				});
+				$('resultType').addEvent('change',function(el){
+					searchReq=twitterSearch('results',$('searchField').value,$('searchNumPerPage').options[$('searchNumPerPage').selectedIndex].value,$('resultType').options[$('resultType').selectedIndex].value,page,'top');   
+				});	
+			});
+       		
+        </script>
+    </head>  
+    <body>  
+    	<div id="mainContainer">    		
+    		<div id="searchForm" >
+    			<form action="/" method="post" name="twitterForm" id="twitterForm" >
+    				<fieldset >
+    					<legend><h1>Twitter Search</h1></legend>
+						 <label>Look for:</label>
+						 <input name="searchField" id="searchField" value="" />
+						 <label>Results per page</label>
+						 <select name="searchNumPerPage" id="searchNumPerPage" />
+						 	<option value="25" selected="selected">25</option>
+						 	<option value="50">50</option>
+						 	<option value="100">100</option>
+						 </select>
+						 <label>Tweet type</label>
+						 <select name="resultType" id="resultType" />
+						 	<option value="mixed">Mixed</option>
+						 	<option value="popular" selected="selected">Popular</option>
+						 	<option value="recent">Recent</option>
+						 </select>
+						 <!-- <input type="submit" value="Search twitter" id="formSubmit" /> -->
+					</fieldset>
+			    </form>
+    		</div>
+    		<div id="resultsList">
+		        <ul id="results"></ul>  
+		    </div><!-- close tweet Results -->
+	    </div><!-- close main containers -->
+    </body>  
+</html> 
